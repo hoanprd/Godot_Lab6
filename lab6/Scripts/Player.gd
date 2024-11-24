@@ -1,5 +1,8 @@
 extends CharacterBody2D
 
+
+@onready var ap = $AnimationPlayer
+@onready var sprite = $Sprite2D
 # Constants
 const SPEED = 200          # Speed for horizontal movement
 const JUMP_FORCE = -250    # Jump force (negative because Y-axis goes down)
@@ -45,6 +48,24 @@ func handle_movement(delta):
 	
 	# Set the horizontal movement velocity
 	velocity.x = direction.x * SPEED
+	
+	if direction.x != 0:
+		switch_direction(direction.x)
+
+	update_animations(direction.x)
+
+func switch_direction(horizontal_direction):
+	sprite.flip_h = (horizontal_direction == -1)
+	#sprite.position.x = horizontal_direction * 4
+
+func update_animations(horizontal_direction):
+	if is_on_floor():
+		if horizontal_direction == 0:
+			ap.play("idle")
+		else:
+			ap.play("run")
+	else:
+		pass
 
 # Function to handle jumping, gravity, and falling
 func handle_gravity_and_jump(delta):
