@@ -10,6 +10,9 @@ const GRAVITY = 900        # Gravity applied when the player is in the air
 
 # Variable to handle vertical velocity
 var vertical_velocity = 0.0  # Vertical speed (gravity, jumping, falling)
+var attackAction = false
+var delayAction = false
+var delayAttackTimer: Timer
 
 # Reference to UI labels
 var health_label: Label
@@ -23,6 +26,7 @@ func _ready():
 	points_label = get_node("../CanvasLayer/UI/PointsLabel")
 	winLose_panel = get_node("../CanvasLayer/UI/WinLosePanel")
 	winLose_label = get_node("../CanvasLayer/UI/WinLosePanel/WinLoseLabel")
+	delayAttackTimer = get_node("DelayAttackTimer")
 
 func _process(delta):
 	if (Global.stopGame == true && Global.health > 0):
@@ -45,14 +49,22 @@ func handle_movement(delta):
 		direction.x += 1
 	if Input.is_action_pressed("ui_left"):
 		direction.x -= 1
+
+	if Input.is_action_just_pressed("ui_attack"):
+		attackAction = true
 	
 	# Set the horizontal movement velocity
 	velocity.x = direction.x * SPEED
 	
 	if direction.x != 0:
 		switch_direction(direction.x)
-
-	update_animations(direction.x)
+	
+	if attackAction == false && delayAction == false:
+		update_animations(direction.x)
+	elif attackAction == true && delayAction == false:
+		ap.play("attack")
+		delayAction = true
+		delayAttackTimer.start()
 
 func switch_direction(horizontal_direction):
 	sprite.flip_h = (horizontal_direction == -1)
@@ -82,3 +94,8 @@ func handle_gravity_and_jump(delta):
 
 	# Move the player using the velocity vector
 	move_and_slide()  # Call this without parameters
+
+
+func _on_delay_attack_timer_timeout() -> void:
+	attackAction = false
+	delayAction = false
