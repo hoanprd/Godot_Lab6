@@ -1,10 +1,10 @@
 [gd_scene load_steps=14 format=3 uid="uid://dp43hk6qcsmqj"]
 
-[ext_resource type="Texture2D" uid="uid://bfaoknak8pa4w" path="res://Tileset/Player_Idle.png" id="1_a7n5m"]
+[ext_resource type="Texture2D" uid="uid://bfaoknak8pa4w" path="res://Sprite/Player_Idle.png" id="1_a7n5m"]
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_phlbn"]
-[ext_resource type="Texture2D" uid="uid://18r3mmtgnnav" path="res://Tileset/Player_Run.png" id="3_x3exl"]
-[ext_resource type="Texture2D" uid="uid://brfs322s4mmot" path="res://Tileset/Player_Attack.png" id="4_bgxwn"]
-[ext_resource type="Texture2D" uid="uid://d2njkch7u8i70" path="res://Tileset/Player_Die.png" id="5_7k71e"]
+[ext_resource type="Texture2D" uid="uid://18r3mmtgnnav" path="res://Sprite/Player_Run.png" id="3_x3exl"]
+[ext_resource type="Texture2D" uid="uid://brfs322s4mmot" path="res://Sprite/Player_Attack.png" id="4_bgxwn"]
+[ext_resource type="Texture2D" uid="uid://d2njkch7u8i70" path="res://Sprite/Player_Die.png" id="5_7k71e"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ur3mg"]
 radius = 3.0
