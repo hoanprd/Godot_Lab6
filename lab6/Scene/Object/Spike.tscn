@@ -1,0 +1,63 @@
+[gd_scene load_steps=10 format=3 uid="uid://f302e3ox3535"]
+
+[ext_resource type="Texture2D" uid="uid://cwiabaimd1u1s" path="res://Sprite/Danger/Static/impale_1.png" id="1_j56qp"]
+[ext_resource type="Script" path="res://Scripts/Spike.gd" id="1_o5pl7"]
+[ext_resource type="Texture2D" uid="uid://c0ga3s54hdpj6" path="res://Sprite/Danger/Static/impale_2.png" id="2_m6cj5"]
+[ext_resource type="Texture2D" uid="uid://dgsp0cn4tvn0d" path="res://Sprite/Danger/Static/impale_3.png" id="3_eaeg3"]
+[ext_resource type="Texture2D" uid="uid://gsoyofs0kh2a" path="res://Sprite/Danger/Static/impale_4.png" id="4_hd4m5"]
+[ext_resource type="Texture2D" uid="uid://cps4nx06wwsyu" path="res://Sprite/Danger/Static/impale_5.png" id="5_r2fvn"]
+[ext_resource type="Texture2D" uid="uid://dvmghvefcom4q" path="res://Sprite/Danger/Static/impale_6.png" id="6_cyhk7"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_240in"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_j56qp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_m6cj5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_eaeg3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_hd4m5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_r2fvn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_cyhk7")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7frxx"]
+size = Vector2(56, 52)
+
+[node name="Spike" type="Area2D"]
+z_index = 2
+scale = Vector2(0.25, 0.25)
+script = ExtResource("1_o5pl7")
+damageDeal = 10
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_240in")
+autoplay = "default"
+frame_progress = 0.627812
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 14)
+shape = SubResource("RectangleShape2D_7frxx")
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="HurtTimer" type="Timer" parent="."]
+wait_time = 0.5
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="HurtTimer" to="." method="_on_hurt_timer_timeout"]

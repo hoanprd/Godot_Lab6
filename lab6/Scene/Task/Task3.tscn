@@ -1,16 +1,16 @@
-[gd_scene load_steps=15 format=4 uid="uid://c23skmt35k1j5"]
+[gd_scene load_steps=15 format=4 uid="uid://numqad7sjf6w"]
 
-[ext_resource type="Texture2D" uid="uid://bkwxktrbo1gc4" path="res://Tileset/TilemapLab6_Fix.png" id="1_j8jgi"]
-[ext_resource type="Texture2D" uid="uid://perxugvwkbrr" path="res://Tileset/BackgroundTile.png" id="2_iumos"]
-[ext_resource type="PackedScene" uid="uid://1eahrpwhxlfx" path="res://Scene/Object/Enemy1.tscn" id="4_qijcy"]
-[ext_resource type="PackedScene" uid="uid://dpmldcawr36fe" path="res://Scene/Object/Coin.tscn" id="5_uqoy3"]
-[ext_resource type="PackedScene" uid="uid://di3es1ytv7wis" path="res://Scene/Object/Player.tscn" id="6_7euux"]
-[ext_resource type="PackedScene" uid="uid://blxl80jm2v1xm" path="res://Scene/Object/UI.tscn" id="6_lfxpw"]
-[ext_resource type="PackedScene" uid="uid://b6kjdvyo7phgq" path="res://Scene/Object/Health.tscn" id="7_5o8ku"]
-[ext_resource type="PackedScene" uid="uid://f302e3ox3535" path="res://Scene/Object/Spike.tscn" id="8_rserk"]
+[ext_resource type="PackedScene" uid="uid://di3es1ytv7wis" path="res://Scene/Object/Player.tscn" id="1_clng5"]
+[ext_resource type="Texture2D" uid="uid://perxugvwkbrr" path="res://Tileset/BackgroundTile.png" id="2_obmkv"]
+[ext_resource type="Texture2D" uid="uid://bkwxktrbo1gc4" path="res://Tileset/TilemapLab6_Fix.png" id="3_qvycr"]
+[ext_resource type="PackedScene" uid="uid://blxl80jm2v1xm" path="res://Scene/Object/UI.tscn" id="4_vloe3"]
+[ext_resource type="PackedScene" uid="uid://dpmldcawr36fe" path="res://Scene/Object/Coin.tscn" id="5_cijfg"]
+[ext_resource type="PackedScene" uid="uid://b6kjdvyo7phgq" path="res://Scene/Object/Health.tscn" id="6_vcpxk"]
+[ext_resource type="PackedScene" uid="uid://1eahrpwhxlfx" path="res://Scene/Object/Enemy1.tscn" id="7_ayp5f"]
+[ext_resource type="PackedScene" uid="uid://f302e3ox3535" path="res://Scene/Object/Spike.tscn" id="8_eq42v"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vc6vo"]
-texture = ExtResource("2_iumos")
+texture = ExtResource("2_obmkv")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -61,7 +61,7 @@ texture = ExtResource("2_iumos")
 11:3/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6duoq"]
-texture = ExtResource("1_j8jgi")
+texture = ExtResource("3_qvycr")
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 1:0/0 = 0
@@ -221,7 +221,7 @@ sources/1 = SubResource("TileSetAtlasSource_6duoq")
 sources/0 = SubResource("TileSetAtlasSource_vc6vo")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xdslh"]
-texture = ExtResource("2_iumos")
+texture = ExtResource("2_obmkv")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -272,7 +272,7 @@ texture = ExtResource("2_iumos")
 11:3/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mhk8m"]
-texture = ExtResource("1_j8jgi")
+texture = ExtResource("3_qvycr")
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 1:0/0 = 0
@@ -427,9 +427,9 @@ terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
 sources/1 = SubResource("TileSetAtlasSource_mhk8m")
 sources/0 = SubResource("TileSetAtlasSource_xdslh")
 
-[node name="Task2" type="Node2D"]
+[node name="Task3" type="Node2D"]
 
-[node name="Player" parent="." instance=ExtResource("6_7euux")]
+[node name="Player" parent="." instance=ExtResource("1_clng5")]
 position = Vector2(73, 451)
 
 [node name="Ground" type="TileMapLayer" parent="." groups=["ground"]]
@@ -459,70 +459,70 @@ tile_set = SubResource("TileSet_6q52e")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="UI" parent="CanvasLayer" instance=ExtResource("6_lfxpw")]
+[node name="UI" parent="CanvasLayer" instance=ExtResource("4_vloe3")]
 
 [node name="PickableItem" type="Node" parent="."]
 
-[node name="Coin" parent="PickableItem" instance=ExtResource("5_uqoy3")]
+[node name="Coin" parent="PickableItem" instance=ExtResource("5_cijfg")]
 position = Vector2(215, 522)
 
-[node name="Coin2" parent="PickableItem" instance=ExtResource("5_uqoy3")]
+[node name="Coin2" parent="PickableItem" instance=ExtResource("5_cijfg")]
 position = Vector2(249, 522)
 
-[node name="Coin3" parent="PickableItem" instance=ExtResource("5_uqoy3")]
+[node name="Coin3" parent="PickableItem" instance=ExtResource("5_cijfg")]
 position = Vector2(232, 522)
 
-[node name="Health" parent="PickableItem" instance=ExtResource("7_5o8ku")]
+[node name="Health" parent="PickableItem" instance=ExtResource("6_vcpxk")]
 position = Vector2(497, 506)
 
 [node name="Danger" type="Node" parent="."]
 
 [node name="Enemy" type="Node" parent="Danger"]
 
-[node name="Enemy1" parent="Danger/Enemy" instance=ExtResource("4_qijcy")]
+[node name="Enemy1" parent="Danger/Enemy" instance=ExtResource("7_ayp5f")]
 z_index = 2
 position = Vector2(314, 499)
 
-[node name="Enemy2" parent="Danger/Enemy" instance=ExtResource("4_qijcy")]
+[node name="Enemy2" parent="Danger/Enemy" instance=ExtResource("7_ayp5f")]
 z_index = 2
 position = Vector2(496, 535)
 
-[node name="Enemy3" parent="Danger/Enemy" instance=ExtResource("4_qijcy")]
+[node name="Enemy3" parent="Danger/Enemy" instance=ExtResource("7_ayp5f")]
 z_index = 2
 position = Vector2(713, 486)
 
-[node name="Enemy4" parent="Danger/Enemy" instance=ExtResource("4_qijcy")]
+[node name="Enemy4" parent="Danger/Enemy" instance=ExtResource("7_ayp5f")]
 z_index = 2
 position = Vector2(1050, 550)
 
 [node name="Static" type="Node" parent="Danger"]
 
-[node name="Spike" parent="Danger/Static" instance=ExtResource("8_rserk")]
+[node name="Spike" parent="Danger/Static" instance=ExtResource("8_eq42v")]
 position = Vector2(167, 520)
 
-[node name="Spike2" parent="Danger/Static" instance=ExtResource("8_rserk")]
+[node name="Spike2" parent="Danger/Static" instance=ExtResource("8_eq42v")]
 position = Vector2(599, 488)
 
-[node name="Spike3" parent="Danger/Static" instance=ExtResource("8_rserk")]
+[node name="Spike3" parent="Danger/Static" instance=ExtResource("8_eq42v")]
 position = Vector2(613, 488)
 
-[node name="Spike4" parent="Danger/Static" instance=ExtResource("8_rserk")]
+[node name="Spike4" parent="Danger/Static" instance=ExtResource("8_eq42v")]
 position = Vector2(627, 488)
 
-[node name="Spike5" parent="Danger/Static" instance=ExtResource("8_rserk")]
+[node name="Spike5" parent="Danger/Static" instance=ExtResource("8_eq42v")]
 position = Vector2(1001, 568)
 
-[node name="Spike6" parent="Danger/Static" instance=ExtResource("8_rserk")]
+[node name="Spike6" parent="Danger/Static" instance=ExtResource("8_eq42v")]
 position = Vector2(1225, 470)
 
-[node name="Spike7" parent="Danger/Static" instance=ExtResource("8_rserk")]
+[node name="Spike7" parent="Danger/Static" instance=ExtResource("8_eq42v")]
 position = Vector2(1640, 534)
 
-[node name="Spike8" parent="Danger/Static" instance=ExtResource("8_rserk")]
+[node name="Spike8" parent="Danger/Static" instance=ExtResource("8_eq42v")]
 position = Vector2(1897, 568)
 
-[node name="Spike9" parent="Danger/Static" instance=ExtResource("8_rserk")]
+[node name="Spike9" parent="Danger/Static" instance=ExtResource("8_eq42v")]
 position = Vector2(1869, 568)
 
-[node name="Spike10" parent="Danger/Static" instance=ExtResource("8_rserk")]
+[node name="Spike10" parent="Danger/Static" instance=ExtResource("8_eq42v")]
 position = Vector2(1883, 568)

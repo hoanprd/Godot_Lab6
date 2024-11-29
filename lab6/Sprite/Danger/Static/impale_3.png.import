@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://u55q0k6k7vr3"
-path="res://.godot/imported/Coin.png-626c9820cdd1de8c0b07260fb26da04d.ctex"
+uid="uid://dgsp0cn4tvn0d"
+path="res://.godot/imported/impale_3.png-2d94d9fd909cb0a521d623bc1181aec4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprite/Coin.png"
-dest_files=["res://.godot/imported/Coin.png-626c9820cdd1de8c0b07260fb26da04d.ctex"]
+source_file="res://Sprite/Danger/Static/impale_3.png"
+dest_files=["res://.godot/imported/impale_3.png-2d94d9fd909cb0a521d623bc1181aec4.ctex"]
 
 [params]
 

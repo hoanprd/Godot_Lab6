@@ -1,6 +1,7 @@
 extends Node
 
 var health = 100
-var gold = 0
+var points = 0
 var stopGame = false
 var getHurt = false
+var getHealth

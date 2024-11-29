@@ -1,27 +1,49 @@
-[gd_scene load_steps=2 format=3 uid="uid://blxl80jm2v1xm"]
+[gd_scene load_steps=7 format=3 uid="uid://blxl80jm2v1xm"]
 
+[ext_resource type="Script" path="res://Scripts/UIManager.gd" id="1_8got3"]
+[ext_resource type="Texture2D" uid="uid://dsy5dtjwj34ki" path="res://Sprite/Item/Heart1.png" id="1_ig474"]
 [ext_resource type="Texture2D" uid="uid://ii6ho85x15bk" path="res://Texture/HurtUI.png" id="1_kp5xg"]
+[ext_resource type="Texture2D" uid="uid://bchkaxqpmfcl7" path="res://Sprite/Item/Coin1.png" id="2_55u0l"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k0jvx"]
+bg_color = Color(0.36668, 0.0670769, 0.116715, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_78g60"]
+bg_color = Color(1, 0.333872, 0.348528, 1)
 
 [node name="UI" type="Control"]
 z_index = 5
 layout_mode = 3
 anchors_preset = 0
+script = ExtResource("1_8got3")
 
 [node name="HealthSprite" type="Sprite2D" parent="."]
+position = Vector2(14.5, 12)
+scale = Vector2(1.78571, 1.83333)
+texture = ExtResource("1_ig474")
 
 [node name="GoldSprite" type="Sprite2D" parent="."]
+position = Vector2(309, 10.5)
+scale = Vector2(1.66667, 1.58333)
+texture = ExtResource("2_55u0l")
 
-[node name="HealthLabel" type="Label" parent="."]
+[node name="HealthBar" type="ProgressBar" parent="."]
 layout_mode = 0
-offset_left = 36.0
-offset_right = 76.0
-offset_bottom = 23.0
+offset_left = 29.0
+offset_top = 6.0
+offset_right = 114.0
+offset_bottom = 19.0
+theme_override_styles/background = SubResource("StyleBoxFlat_k0jvx")
+theme_override_styles/fill = SubResource("StyleBoxFlat_78g60")
+value = 80.0
+show_percentage = false
 
 [node name="PointsLabel" type="Label" parent="."]
 layout_mode = 0
-offset_left = 240.0
-offset_right = 280.0
+offset_left = 251.0
+offset_right = 298.0
 offset_bottom = 23.0
+horizontal_alignment = 2
 
 [node name="WinLosePanel" type="Panel" parent="."]
 visible = false

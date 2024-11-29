@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://1eahrpwhxlfx"]
+[gd_scene load_steps=7 format=3 uid="uid://1eahrpwhxlfx"]
 
 [ext_resource type="Texture2D" uid="uid://oocsnon0lu0l" path="res://Sprite/Enemy1_Default.png" id="1_70ma8"]
+[ext_resource type="Script" path="res://Scripts/Enemy.gd" id="1_ddy3i"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_r3gwt"]
-height = 28.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_c4c4w"]
+height = 24.0
 
 [sub_resource type="Animation" id="Animation_4vdvi"]
 resource_name = "Enemy1_idle"
@@ -42,19 +43,32 @@ _data = {
 "RESET": SubResource("Animation_53iay")
 }
 
-[node name="Enemy1" type="CharacterBody2D"]
+[node name="Enemy1" type="Area2D"]
+script = ExtResource("1_ddy3i")
+damageDeal = 10
+enemySpeed = 20.0
+rangeLeft = -20.0
+rangeRight = 20.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_70ma8")
 hframes = 2
 
-[node name="Area2D" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("CapsuleShape2D_r3gwt")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_c4c4w")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_qcgqr")
 }
 autoplay = "Enemy1_idle"
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="HurtTimer" type="Timer" parent="."]
+wait_time = 0.5
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="HurtTimer" to="." method="_on_hurt_timer_timeout"]
