@@ -3,7 +3,7 @@ extends RigidBody2D
 @onready var move_right_force = Vector2(20, 0)
 @onready var move_left_force = Vector2(-20, 0)
 @onready var jump_force = Vector2(0, -300)
-@onready var move_speed_max = 150
+@onready var move_speed_max = 180
 @onready var ray_right_foot = $RayCast_right
 @onready var ray_left_foot = $RayCast_left
 @onready var ap = $AnimationPlayer
@@ -32,11 +32,13 @@ func set_state():
 
 func process_input():
 	var direction = Vector2.ZERO
-	if Input.is_action_pressed("ui_right") and self.linear_velocity.x < move_speed_max:
-		self.apply_impulse(move_right_force, Vector2(0,0))
+	if Input.is_action_pressed("ui_right"):
+		if self.linear_velocity.x < move_speed_max:
+			self.apply_impulse(move_right_force, Vector2(0,0))
 		direction.x += 1
-	if Input.is_action_pressed("ui_left") and self.linear_velocity.x > -move_speed_max:
-		self.apply_impulse(move_left_force, Vector2(0,0))
+	if Input.is_action_pressed("ui_left"):
+		if self.linear_velocity.x > -move_speed_max:
+			self.apply_impulse(move_left_force, Vector2(0,0))
 		direction.x -= 1
 		
 	if Input.is_action_just_pressed("ui_accept") and can_jump:

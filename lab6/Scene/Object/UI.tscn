@@ -1,0 +1,48 @@
+[gd_scene load_steps=2 format=3 uid="uid://blxl80jm2v1xm"]
+
+[ext_resource type="Texture2D" uid="uid://ii6ho85x15bk" path="res://Texture/HurtUI.png" id="1_kp5xg"]
+
+[node name="UI" type="Control"]
+z_index = 5
+layout_mode = 3
+anchors_preset = 0
+
+[node name="HealthSprite" type="Sprite2D" parent="."]
+
+[node name="GoldSprite" type="Sprite2D" parent="."]
+
+[node name="HealthLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 36.0
+offset_right = 76.0
+offset_bottom = 23.0
+
+[node name="PointsLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 240.0
+offset_right = 280.0
+offset_bottom = 23.0
+
+[node name="WinLosePanel" type="Panel" parent="."]
+visible = false
+layout_mode = 0
+offset_right = 320.0
+offset_bottom = 180.0
+
+[node name="WinLoseLabel" type="Label" parent="WinLosePanel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="HurtPanel" type="Panel" parent="."]
+visible = false
+layout_mode = 0
+offset_right = 320.0
+offset_bottom = 180.0
+
+[node name="HurtSprite" type="Sprite2D" parent="HurtPanel"]
+position = Vector2(160, 90)
+scale = Vector2(0.138889, 0.138889)
+texture = ExtResource("1_kp5xg")
+
+[node name="Timer" type="Timer" parent="."]
