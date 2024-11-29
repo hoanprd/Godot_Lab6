@@ -16,8 +16,9 @@ func _process(delta: float) -> void:
 
 
 func _on_body_entered(body: Node2D) -> void:
-	if (_itemId == 0):
-		Global.gold += 1
-	elif (_itemId == 1):
-		Global.health += 20
-	queue_free()
+	if body.is_in_group("player"):
+		if (_itemId == 0):
+			Global.gold += 1
+		elif (_itemId == 1):
+			Global.health += 20
+		queue_free()

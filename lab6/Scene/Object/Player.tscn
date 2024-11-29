@@ -403,7 +403,7 @@ _data = {
 "run": SubResource("Animation_iy6ff")
 }
 
-[node name="Player" type="RigidBody2D"]
+[node name="Player" type="RigidBody2D" groups=["player"]]
 z_index = 2
 lock_rotation = true
 script = ExtResource("1_ph8xx")

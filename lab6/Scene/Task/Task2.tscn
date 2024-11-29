@@ -464,13 +464,16 @@ position = Vector2(246, 492)
 
 [node name="UI" parent="CanvasLayer" instance=ExtResource("6_lfxpw")]
 
-[node name="PickUpItem" type="Node" parent="."]
+[node name="PickableItem" type="Node" parent="."]
 
-[node name="Coin" parent="PickUpItem" instance=ExtResource("5_uqoy3")]
-position = Vector2(209, 522)
+[node name="Coin" parent="PickableItem" instance=ExtResource("5_uqoy3")]
+position = Vector2(215, 522)
 
-[node name="Coin2" parent="PickUpItem" instance=ExtResource("5_uqoy3")]
-position = Vector2(414, 491)
+[node name="Coin2" parent="PickableItem" instance=ExtResource("5_uqoy3")]
+position = Vector2(249, 522)
 
-[node name="Health" parent="PickUpItem" instance=ExtResource("7_5o8ku")]
+[node name="Coin3" parent="PickableItem" instance=ExtResource("5_uqoy3")]
+position = Vector2(232, 522)
+
+[node name="Health" parent="PickableItem" instance=ExtResource("7_5o8ku")]
 position = Vector2(497, 506)
