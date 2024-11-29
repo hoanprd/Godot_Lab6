@@ -1,60 +1,49 @@
-extends CharacterBody2D
+extends RigidBody2D
 
-
+@onready var move_right_force = Vector2(20, 0)
+@onready var move_left_force = Vector2(-20, 0)
+@onready var jump_force = Vector2(0, -300)
+@onready var move_speed_max = 150
+@onready var ray_right_foot = $RayCast_right
+@onready var ray_left_foot = $RayCast_left
 @onready var ap = $AnimationPlayer
 @onready var sprite = $Sprite2D
-# Constants
-const SPEED = 200          # Speed for horizontal movement
-const JUMP_FORCE = -250    # Jump force (negative because Y-axis goes down)
-const GRAVITY = 900        # Gravity applied when the player is in the air
+@onready var can_jump = false
 
-# Variable to handle vertical velocity
-var vertical_velocity = 0.0  # Vertical speed (gravity, jumping, falling)
 var attackAction = false
 var delayAction = false
-var delayAttackTimer: Timer
+var delayAttackTimer : Timer
 
-# Reference to UI labels
-var health_label: Label
-var points_label: Label
-var winLose_panel: Panel
-var winLose_label: Label
-
-func _ready():
-	# Get the UI labels from the scene
-	health_label = get_node("../CanvasLayer/UI/HealthLabel")
-	points_label = get_node("../CanvasLayer/UI/PointsLabel")
-	winLose_panel = get_node("../CanvasLayer/UI/WinLosePanel")
-	winLose_label = get_node("../CanvasLayer/UI/WinLosePanel/WinLoseLabel")
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
 	delayAttackTimer = get_node("DelayAttackTimer")
 
-func _process(delta):
-	if (Global.stopGame == true && Global.health > 0):
-		pass
-	elif (Global.health <= 0):
-		Global.stopGame = true
-		winLose_label.text = "YOU LOSE"
-		winLose_panel.visible = true
-		Global.stopGame = true
-	elif (Global.stopGame == false && Global.health > 0):
-		handle_movement(delta)
-		handle_gravity_and_jump(delta)
 
-# Function to handle player movement (horizontal)
-func handle_movement(delta):
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	set_state()
+	process_input()
+
+func set_state():
+	if ray_left_foot.is_colliding() or ray_right_foot.is_colliding():
+		can_jump = true
+	else:
+		can_jump = false
+
+func process_input():
 	var direction = Vector2.ZERO
-	
-	# Left and Right Movement
-	if Input.is_action_pressed("ui_right"):
+	if Input.is_action_pressed("ui_right") and self.linear_velocity.x < move_speed_max:
+		self.apply_impulse(move_right_force, Vector2(0,0))
 		direction.x += 1
-	if Input.is_action_pressed("ui_left"):
+	if Input.is_action_pressed("ui_left") and self.linear_velocity.x > -move_speed_max:
+		self.apply_impulse(move_left_force, Vector2(0,0))
 		direction.x -= 1
-
+		
+	if Input.is_action_just_pressed("ui_accept") and can_jump:
+		self.apply_impulse(jump_force, Vector2(0, 0))
+	
 	if Input.is_action_just_pressed("ui_attack"):
 		attackAction = true
-	
-	# Set the horizontal movement velocity
-	velocity.x = direction.x * SPEED
 	
 	if direction.x != 0:
 		switch_direction(direction.x)
@@ -68,33 +57,15 @@ func handle_movement(delta):
 
 func switch_direction(horizontal_direction):
 	sprite.flip_h = (horizontal_direction == -1)
-	#sprite.position.x = horizontal_direction * 4
 
 func update_animations(horizontal_direction):
-	if is_on_floor():
+	if can_jump == true:
 		if horizontal_direction == 0:
 			ap.play("idle")
 		else:
 			ap.play("run")
 	else:
 		pass
-
-# Function to handle jumping, gravity, and falling
-func handle_gravity_and_jump(delta):
-	if is_on_floor():
-		if Input.is_action_just_pressed("ui_accept"):
-			vertical_velocity = JUMP_FORCE
-		else:
-			vertical_velocity = 0
-	else:
-		vertical_velocity += GRAVITY * delta
-
-	# Update the vertical component of the velocity
-	velocity.y = vertical_velocity
-
-	# Move the player using the velocity vector
-	move_and_slide()  # Call this without parameters
-
 
 func _on_delay_attack_timer_timeout() -> void:
 	attackAction = false

@@ -1,18 +1,17 @@
-[gd_scene load_steps=14 format=3 uid="uid://di3es1ytv7wis"]
+[gd_scene load_steps=14 format=3 uid="uid://dp43hk6qcsmqj"]
 
-[ext_resource type="Script" path="res://Scripts/Player.gd" id="1_ph8xx"]
-[ext_resource type="Texture2D" uid="uid://bfaoknak8pa4w" path="res://Sprite/Player_Idle.png" id="2_oi3yu"]
-[ext_resource type="Texture2D" uid="uid://brfs322s4mmot" path="res://Sprite/Player_Attack.png" id="3_8pfb1"]
-[ext_resource type="Texture2D" uid="uid://d2njkch7u8i70" path="res://Sprite/Player_Die.png" id="4_f3ywi"]
-[ext_resource type="Texture2D" uid="uid://18r3mmtgnnav" path="res://Sprite/Player_Run.png" id="5_bhbkk"]
+[ext_resource type="Texture2D" uid="uid://bfaoknak8pa4w" path="res://Sprite/Player_Idle.png" id="1_a7n5m"]
+[ext_resource type="Script" path="res://Scripts/Player_old.gd" id="1_phlbn"]
+[ext_resource type="Texture2D" uid="uid://18r3mmtgnnav" path="res://Sprite/Player_Run.png" id="3_x3exl"]
+[ext_resource type="Texture2D" uid="uid://brfs322s4mmot" path="res://Sprite/Player_Attack.png" id="4_bgxwn"]
+[ext_resource type="Texture2D" uid="uid://d2njkch7u8i70" path="res://Sprite/Player_Die.png" id="5_7k71e"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ur3mg"]
 radius = 3.0
 height = 16.0
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pmfc4"]
-radius = 6.0
-height = 12.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hewcl"]
+size = Vector2(15, 12)
 
 [sub_resource type="Animation" id="Animation_clpcq"]
 length = 0.001
@@ -26,7 +25,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("2_oi3yu")]
+"values": [ExtResource("1_a7n5m")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -114,7 +113,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("3_8pfb1")]
+"values": [ExtResource("4_bgxwn")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -202,7 +201,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("4_f3ywi")]
+"values": [ExtResource("5_7k71e")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -254,7 +253,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("2_oi3yu")]
+"values": [ExtResource("1_a7n5m")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -331,7 +330,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("5_bhbkk")]
+"values": [ExtResource("3_x3exl")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -403,13 +402,12 @@ _data = {
 "run": SubResource("Animation_iy6ff")
 }
 
-[node name="Player" type="RigidBody2D"]
+[node name="Player" type="CharacterBody2D"]
 z_index = 2
-lock_rotation = true
-script = ExtResource("1_ph8xx")
+script = ExtResource("1_phlbn")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_oi3yu")
+texture = ExtResource("1_a7n5m")
 hframes = 2
 
 [node name="AttackArea" type="Area2D" parent="Sprite2D"]
@@ -423,7 +421,7 @@ disabled = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, 3)
-shape = SubResource("CapsuleShape2D_pmfc4")
+shape = SubResource("RectangleShape2D_hewcl")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 limit_left = 0
@@ -438,16 +436,5 @@ autoplay = "idle"
 
 [node name="DelayAttackTimer" type="Timer" parent="."]
 wait_time = 0.7
-
-[node name="RayCast_left" type="RayCast2D" parent="."]
-z_index = 2
-position = Vector2(-5, 8)
-target_position = Vector2(0, 9)
-collision_mask = 13
-
-[node name="RayCast_right" type="RayCast2D" parent="."]
-z_index = 2
-position = Vector2(6, 8)
-target_position = Vector2(0, 9)
 
 [connection signal="timeout" from="DelayAttackTimer" to="." method="_on_delay_attack_timer_timeout"]
