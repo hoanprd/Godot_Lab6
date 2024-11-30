@@ -1,0 +1,85 @@
+[gd_scene load_steps=8 format=3 uid="uid://8rio7ljd35um"]
+
+[ext_resource type="Script" path="res://Scripts/Enemy.gd" id="1_bv63x"]
+[ext_resource type="Texture2D" uid="uid://cemodhx0goj0q" path="res://Sprite/Danger/Enemy/Enemy2_Default.png" id="2_6mu48"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gqn8b"]
+radius = 11.0
+height = 28.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_c4c4w"]
+height = 24.0
+
+[sub_resource type="Animation" id="Animation_4vdvi"]
+resource_name = "Enemy1_idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="Animation" id="Animation_53iay"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qcgqr"]
+_data = {
+"Enemy1_idle": SubResource("Animation_4vdvi"),
+"RESET": SubResource("Animation_53iay")
+}
+
+[node name="EnemyB" type="CharacterBody2D" groups=["enemy"]]
+z_index = 2
+script = ExtResource("1_bv63x")
+id = 1
+damageDeal = 30
+enemySpeed = 20.0
+rangeLeft = -20.0
+rangeRight = 20.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_6mu48")
+hframes = 2
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CapsuleShape2D_gqn8b")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_c4c4w")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_qcgqr")
+}
+autoplay = "Enemy1_idle"
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="HurtTimer" type="Timer" parent="."]
+wait_time = 0.5
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_body_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="HurtTimer" to="." method="_on_hurt_timer_timeout"]

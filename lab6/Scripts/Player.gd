@@ -8,6 +8,8 @@ extends RigidBody2D
 @onready var ray_left_foot = $RayCast_left
 @onready var ap = $AnimationPlayer
 @onready var sprite = $Sprite2D
+@onready var attackSound = $AttackFX
+@onready var hurtSound = $HurtFX
 @onready var can_jump = false
 
 var attackAction = false
@@ -21,8 +23,19 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	set_state()
-	process_input()
+	if Global.win == false:
+		if Global.loseArea == false and Global.loseKill == false:
+			if Global.getHurt == true:
+				hurtSound.play()
+			set_state()
+			process_input()
+	if Global.loseArea == true:
+		#queue_free()
+		linear_velocity = Vector2(0, 0)
+	elif Global.health <= 0:
+		if Global.loseKill == false:
+			Global.loseKill = true
+			ap.play("die")
 
 func set_state():
 	if ray_left_foot.is_colliding() or ray_right_foot.is_colliding():
@@ -53,6 +66,7 @@ func process_input():
 	if attackAction == false && delayAction == false:
 		update_animations(direction.x)
 	elif attackAction == true && delayAction == false:
+		attackSound.play()
 		ap.play("attack")
 		delayAction = true
 		delayAttackTimer.start()

@@ -25,6 +25,8 @@ func _on_body_entered(body: Node2D) -> void:
 			tween.chain().tween_callback(queue_free)
 		elif (_itemId == 1):
 			Global.health += 20
+			if Global.health > 100:
+				Global.health = 100
 			Global.getHealth = true
 			queue_free()
 		#queue_free()
