@@ -86,7 +86,7 @@ tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(5, 3)]
+"values": [Vector2(0, 3)]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
@@ -98,7 +98,7 @@ tracks/6/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(2, 2)]
+"values": [Vector2(1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_ceej4"]
@@ -299,10 +299,10 @@ tracks/4/path = NodePath("Sprite2D/AttackArea/CollisionShape2D:disabled")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [true, true]
+"values": [true, true, true]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -376,10 +376,10 @@ tracks/4/path = NodePath("Sprite2D/AttackArea/CollisionShape2D:disabled")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.6),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [true, true]
+"values": [true, true, true, true, true, true, true]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -388,10 +388,22 @@ tracks/5/path = NodePath("Sprite2D/AttackArea/CollisionShape2D:position")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0, 0.6),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(0, 3), Vector2(0, 3)]
+"values": [Vector2(0, 3), Vector2(0, 3), Vector2(0, 3), Vector2(0, 3), Vector2(0, 3), Vector2(0, 3), Vector2(0, 3)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Sprite2D/AttackArea/CollisionShape2D:scale")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 1), Vector2(1, 1), Vector2(1, 1), Vector2(1, 1), Vector2(1, 1), Vector2(1, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_8jbdn"]
@@ -412,12 +424,12 @@ script = ExtResource("1_ph8xx")
 texture = ExtResource("2_oi3yu")
 hframes = 2
 
-[node name="AttackArea" type="Area2D" parent="Sprite2D"]
+[node name="AttackArea" type="Area2D" parent="Sprite2D" groups=["playerHitbox"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/AttackArea"]
-position = Vector2(5, 3)
+z_index = 2
+position = Vector2(0, 3)
 rotation = 1.5708
-scale = Vector2(2, 2)
 shape = SubResource("CapsuleShape2D_ur3mg")
 disabled = true
 
@@ -450,4 +462,5 @@ z_index = 2
 position = Vector2(6, 8)
 target_position = Vector2(0, 9)
 
+[connection signal="body_entered" from="Sprite2D/AttackArea" to="." method="_on_attack_area_body_entered"]
 [connection signal="timeout" from="DelayAttackTimer" to="." method="_on_delay_attack_timer_timeout"]

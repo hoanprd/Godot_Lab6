@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://bkwxktrbo1gc4" path="res://Tileset/TilemapLab6_Fix.png" id="1_j8jgi"]
 [ext_resource type="Texture2D" uid="uid://perxugvwkbrr" path="res://Tileset/BackgroundTile.png" id="2_iumos"]
-[ext_resource type="PackedScene" uid="uid://1eahrpwhxlfx" path="res://Scene/Object/Enemy1.tscn" id="4_qijcy"]
+[ext_resource type="PackedScene" uid="uid://1eahrpwhxlfx" path="res://Scene/Enemy/Enemy1.tscn" id="4_qijcy"]
 [ext_resource type="PackedScene" uid="uid://dpmldcawr36fe" path="res://Scene/Object/Coin.tscn" id="5_uqoy3"]
 [ext_resource type="PackedScene" uid="uid://di3es1ytv7wis" path="res://Scene/Object/Player.tscn" id="6_7euux"]
 [ext_resource type="PackedScene" uid="uid://blxl80jm2v1xm" path="res://Scene/Object/UI.tscn" id="6_lfxpw"]

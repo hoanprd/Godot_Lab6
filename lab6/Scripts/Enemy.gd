@@ -1,5 +1,6 @@
-extends Area2D
+extends CharacterBody2D
 
+@export var hp : int
 @export var damageDeal : int
 @export var enemySpeed : float
 @export var rangeLeft : float
@@ -9,7 +10,7 @@ var timer: Timer
 var hurtTimer: Timer
 var sprite: Sprite2D
 
-# Variables for movement
+var _hp
 var _speed
 var move_direction: Vector2 = Vector2(1, 0)
 var left_limit
@@ -25,15 +26,16 @@ func _ready():
 	# Store the initial position of the goblin
 	start_position = position
 	
+	_hp = hp
 	_damageDeal = damageDeal
 	_speed = enemySpeed
 	left_limit = rangeLeft
 	right_limit = rangeRight
 
 func _process(delta):
-	move_goblin(delta)
+	move_enemy(delta)
 
-func move_goblin(delta):
+func move_enemy(delta):
 	position += move_direction * _speed * delta
 	
 	if position.x <= start_position.x + left_limit:
@@ -48,6 +50,12 @@ func flip_sprite():
 		sprite.scale.x = -abs(sprite.scale.x)
 	else:
 		sprite.scale.x = abs(sprite.scale.x)
+
+func CheckEnemyStatus():
+	if _hp <= 0:
+		queue_free()
+	else:
+		sprite.self_modulate = Color(0, 1, 0)
 
 func _on_body_entered(body: Node2D) -> void:
 	if body.name == "Player" and Global.health <= 100 and Global.health > 0:

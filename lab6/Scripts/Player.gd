@@ -72,3 +72,8 @@ func update_animations(horizontal_direction):
 func _on_delay_attack_timer_timeout() -> void:
 	attackAction = false
 	delayAction = false
+
+
+func _on_attack_area_body_entered(body: Node2D) -> void:
+	if body.is_in_group("enemy"):
+		body.queue_free()
