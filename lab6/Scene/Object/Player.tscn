@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://di3es1ytv7wis"]
+[gd_scene load_steps=18 format=3 uid="uid://di3es1ytv7wis"]
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_ph8xx"]
 [ext_resource type="Texture2D" uid="uid://bfaoknak8pa4w" path="res://Sprite/Player_Idle.png" id="2_oi3yu"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://d2njkch7u8i70" path="res://Sprite/Player_Die.png" id="4_f3ywi"]
 [ext_resource type="Texture2D" uid="uid://18r3mmtgnnav" path="res://Sprite/Player_Run.png" id="5_bhbkk"]
 [ext_resource type="AudioStream" uid="uid://clpyq0wna2bjm" path="res://Sound/FX/ThiefAttackFX.wav" id="6_4lnu0"]
+[ext_resource type="AudioStream" uid="uid://mkirlimp38kk" path="res://Sound/FX/JumpFX.mp3" id="6_kk3dy"]
 [ext_resource type="AudioStream" uid="uid://bygfjnbes7f5u" path="res://Sound/BGM/Lab6_BGM.mp3" id="7_djig2"]
 [ext_resource type="AudioStream" uid="uid://b5evjx71n5w7j" path="res://Sound/FX/ManHurtFX.mp3" id="7_e2iuw"]
 
@@ -420,6 +421,8 @@ _data = {
 
 [node name="Player" type="RigidBody2D" groups=["player"]]
 z_index = 3
+collision_layer = 4
+collision_mask = 9
 lock_rotation = true
 script = ExtResource("1_ph8xx")
 
@@ -466,16 +469,23 @@ z_index = 2
 position = Vector2(6, 8)
 target_position = Vector2(0, 9)
 
+[node name="JumpFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_kk3dy")
+bus = &"SFX"
+
 [node name="AttackFX" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("6_4lnu0")
+bus = &"SFX"
 
 [node name="HurtFX" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("7_e2iuw")
+bus = &"SFX"
 
-[node name="BGM" type="AudioStreamPlayer2D" parent="."]
+[node name="BGM" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_djig2")
 volume_db = -10.0
 autoplay = true
+bus = &"Music"
 
 [connection signal="body_entered" from="Sprite2D/AttackArea" to="." method="_on_attack_area_body_entered"]
 [connection signal="timeout" from="DelayAttackTimer" to="." method="_on_delay_attack_timer_timeout"]

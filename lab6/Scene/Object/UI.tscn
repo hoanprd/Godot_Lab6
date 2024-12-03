@@ -1,10 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://blxl80jm2v1xm"]
+[gd_scene load_steps=7 format=3 uid="uid://blxl80jm2v1xm"]
 
 [ext_resource type="Script" path="res://Scripts/UIManager.gd" id="1_8got3"]
 [ext_resource type="Texture2D" uid="uid://dsy5dtjwj34ki" path="res://Sprite/Item/Heart1.png" id="1_ig474"]
 [ext_resource type="Texture2D" uid="uid://ii6ho85x15bk" path="res://Texture/HurtUI.png" id="1_kp5xg"]
 [ext_resource type="Texture2D" uid="uid://bchkaxqpmfcl7" path="res://Sprite/Item/Coin1.png" id="2_55u0l"]
-[ext_resource type="AudioStream" uid="uid://b5evjx71n5w7j" path="res://Sound/FX/ManHurtFX.mp3" id="5_0ebmn"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k0jvx"]
 bg_color = Color(0.36668, 0.0670769, 0.116715, 1)
@@ -72,8 +71,5 @@ texture = ExtResource("1_kp5xg")
 
 [node name="ExitGameTimer" type="Timer" parent="."]
 wait_time = 3.0
-
-[node name="HurtFX" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("5_0ebmn")
 
 [connection signal="timeout" from="ExitGameTimer" to="." method="_on_exit_game_timer_timeout"]

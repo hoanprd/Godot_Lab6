@@ -48,6 +48,8 @@ _data = {
 }
 
 [node name="EnemyA" type="CharacterBody2D" groups=["enemy"]]
+collision_layer = 8
+collision_mask = 4
 script = ExtResource("1_ddy3i")
 damageDeal = 10
 enemySpeed = 20.0

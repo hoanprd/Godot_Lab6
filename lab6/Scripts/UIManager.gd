@@ -2,7 +2,6 @@ extends Control
 
 @onready var healthBar = $HealthBar
 @onready var pointsLabel = $PointsLabel
-@onready var hurtSound = $HurtFX
 
 var hurtPanel: Panel
 var exitGameTimer: Timer
@@ -26,7 +25,6 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if Global.getHurt:
-		#hurtSound.play()
 		hurtPanel.visible = true
 	else:
 		hurtPanel.visible = false
