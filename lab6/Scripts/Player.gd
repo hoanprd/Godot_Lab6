@@ -29,6 +29,7 @@ func _process(delta: float) -> void:
 	if Global.win == false:
 		if Global.loseArea == false and Global.loseKill == false:
 			if Global.getHurt == true:
+				AudioServer.set_bus_mute(sfxBus, false)
 				hurtSound.play()
 			set_state()
 			process_input()
